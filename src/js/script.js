@@ -60,18 +60,31 @@
     }
   }
 
+
   const app = {
     initMenu: function(){
       const testProduct = new Product();
       console.log('testProduct:', testProduct);
     },
+    initData: function(){
+      const thisApp = this;
+      
+      thisApp.data = dataSource;
+      thisApp.initData();
+      console.log('thisApp.data:', thisApp.data);
+    },
+
     init: function() {
       const thisApp = this;
+      for (let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+      
       thisApp.initMenu();
     },
   };
