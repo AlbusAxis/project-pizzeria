@@ -83,6 +83,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
   
     initAccordion(){
@@ -161,7 +162,12 @@
           }
         }
       }
-    
+      const optionImage = thisProduct.imageWrapper.querySelector(select.pizza.images);
+      
+      if (optionImage === null) {
+        console.log('optionImage:', optionImage);
+      }
+
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
