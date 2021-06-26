@@ -181,7 +181,30 @@
   class AmountWidget {
     constructor(element){
       const thisWidget = this;
+      thisWidget.getElements(element);
+      thisWidget.element = element;
+      thisWidget.input = thisWidget.element.querySelector(select.widgets.amount.input);
+      thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
+      thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
+      thisWidget.setValue(thisWidget.input.value);
+    }
+    setValue(value){
+      const thisWidget = this;
+      const newValue = parseInt(value);
 
+      thisWidget.value = newValue;
+      thisWidget.input.value = thisWidget.value;
+
+      if(thisWidget.value !== newValue) {
+        thisWidget.value = newValue;
+      }
+      // if(Number.isNaN(thisWidget.value)){  ----- Tutaj pomoc
+      // return 
+      //}
+
+      if(thisWidget.value !== newValue && !isNaN(newValue)) {
+        thisWidget.value = newValue;
+      }
     }
   }
   
