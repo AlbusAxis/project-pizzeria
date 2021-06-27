@@ -206,6 +206,9 @@
         thisWidget.value = newValue;
       }
     }
+    initActions(){
+      
+    }
   }
   
   
