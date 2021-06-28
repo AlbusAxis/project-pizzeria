@@ -191,6 +191,8 @@
     setValue(value){
       const thisWidget = this;
       const newValue = parseInt(value);
+      const minValue = settings.amountWidget.defaultMin;
+      const maxValue = settings.amountWidget.defaultMax;
 
       thisWidget.value = newValue;
       thisWidget.input.value = thisWidget.value;
@@ -199,17 +201,34 @@
       if(thisWidget.value !== newValue) {
         thisWidget.value = newValue;
       }
-      initActions(){
-        thisWidget.input.addEventListener('change', function(){setValue === input});
-        thisWidget.linkDecrease.addEventListener('click', function(){setValue = thisWidget.value - 1});
-        thisWidget.linkIncrease.addEventListener('click', function(){setValue = thisWidget.value + 1});
-      }
+
 
       if(thisWidget.value !== newValue && !isNaN(newValue)) {
         thisWidget.value = newValue;
       }
+      if(minValue !== settings.amountWidget.defaultMin && !isNaN(minValue)){
+        thisWidget.value = minValue;
+      }
+      if(maxValue !== settings.amountWidget.defaultMax && !isNaN(maxValue)){
+        thisWidget.value =maxValue;
+      }
+    }
+    initActions(){
+      const thisWidget = this;
+      thisWidget.input.addEventListener('change', function(setValue){
+        setValue(thisWidget.input.value);
+      });
+      thisWidget.linkDecrease.addEventListener('click', function(event, setValue){
+        event.preventDefault();
+        setValue(thisWidget.value - 1);
+      });
+      thisWidget.linkIncrease.addEventListener('click', function(event, setValue){
+        event.preventDefault();
+        setValue(thisWidget.value + 1);
+      });
     }
   }
+  
   
   
 
