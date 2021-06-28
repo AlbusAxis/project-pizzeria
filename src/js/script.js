@@ -194,22 +194,20 @@
 
       thisWidget.value = newValue;
       thisWidget.input.value = thisWidget.value;
+      
 
       if(thisWidget.value !== newValue) {
         thisWidget.value = newValue;
       }
-      // if(Number.isNaN(thisWidget.value)){  ----- Tutaj pomoc
-      // return 
-      //}
+      initActions(){
+        thisWidget.input.addEventListener('change', function(){setValue === input});
+        thisWidget.linkDecrease.addEventListener('click', function(){setValue = thisWidget.value - 1});
+        thisWidget.linkIncrease.addEventListener('click', function(){setValue = thisWidget.value + 1});
+      }
 
       if(thisWidget.value !== newValue && !isNaN(newValue)) {
         thisWidget.value = newValue;
       }
-    }
-    initActions(){
-      thisWidget.input.addEventListener('change', setValue === thisWidget.input);
-      
-
     }
   }
   
