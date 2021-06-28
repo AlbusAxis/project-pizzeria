@@ -207,7 +207,9 @@
       }
     }
     initActions(){
+      thisWidget.input.addEventListener('change', setValue === thisWidget.input);
       
+
     }
   }
   
