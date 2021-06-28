@@ -132,6 +132,9 @@
         event.preventDefault();
         thisProduct.processOrder();
       });
+      thisProduct.amountWidgetElem.addEventListener('update', function(){
+        thisProduct.processOrder();
+      });
     }
     processOrder() {
       const thisProduct = this;
@@ -173,7 +176,7 @@
       if (optionImage === null) {
         console.log('optionImage:', optionImage);
       }
-
+      price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
@@ -226,6 +229,12 @@
         event.preventDefault();
         setValue(thisWidget.value + 1);
       });
+    }
+
+    announce(){
+      const thisWidget = this;
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
     }
   }
   
