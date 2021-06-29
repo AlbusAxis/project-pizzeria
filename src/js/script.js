@@ -90,12 +90,12 @@
       const thisProduct = this;
       thisProduct.id = id;
       thisProduct.data = data;
-      thisProduct.renderInMenu;
-      thisProduct.getElements;
-      thisProduct.initAccordion; // ??
-      thisProduct.initOrderForm;
-      thisProduct.processOrder;
-      thisProduct.initAmountWidget;
+      thisProduct.renderInMenu.dom;
+      thisProduct.getElements.dom;
+      thisProduct.initAccordion.dom; // ??
+      thisProduct.initOrderForm.dom;
+      thisProduct.processOrder.dom;
+      thisProduct.initAmountWidget.dom;
       console.log('new Product:', thisProduct);
 
     }
@@ -272,8 +272,21 @@
       thisWidget.element.dispatchEvent(event);
     }
   }
-  
-  
+
+  class Cart {
+    constructor(element){
+      const thisCart = this;
+      thisCart.products = [];
+      thisCart.getElements(element);
+    }
+    getElements(element){
+      const thisCart = this;
+      thisCart.dom = {};
+      thisCart.dom.wrapper = element;
+
+    }
+
+  }
   
 
   
@@ -304,5 +317,10 @@
       thisApp.initMenu();
       app.init();
     },
+    initCart: function(){
+      const thisApp = this;
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
+    }
   };
 }
