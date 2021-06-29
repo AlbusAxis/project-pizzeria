@@ -194,14 +194,14 @@
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId] && formData[paramId].includes(optionId)) {
             // check if the option is not default
-            if(!option === option.default) {
+            if(!option.default) {
               // add option price to price variable
-              const totalPrice = price + option.price;}
-          }else { totalPrice = price;
+              price += option.price;}
+          }else {
             // check if the option is default
-            if(option === option.default) {
+            if(option.default) {
               // reduce price variable
-              const reduce = option.price - price;}
+              price -= option.price;}
           }
         }
       }
@@ -252,16 +252,17 @@
     }
     initActions(){
       const thisWidget = this;
-      thisWidget.input.addEventListener('change', function(setValue){
-        setValue(thisWidget.input.value);
-      });
-      thisWidget.linkDecrease.addEventListener('click', function(event, setValue){
+      thisWidget.input.addEventListener('change', function(event){
         event.preventDefault();
-        setValue(thisWidget.value - 1);
+        thisWidget.setValue(thisWidget.input.value);
       });
-      thisWidget.linkIncrease.addEventListener('click', function(event, setValue){
+      thisWidget.linkDecrease.addEventListener('click', function(event){
         event.preventDefault();
-        setValue(thisWidget.value + 1);
+        thisWidget.setValue(thisWidget.value - 1);
+      });
+      thisWidget.linkIncrease.addEventListener('click', function(event){
+        event.preventDefault();
+        thisWidget.setValue(thisWidget.value + 1);
       });
     }
 
