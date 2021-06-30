@@ -99,6 +99,10 @@
       console.log('new Product:', thisProduct);
 
     }
+    addToCart(){
+      const thisProduct = this;
+      app.cart.add(thisProduct);
+    }
     renderInMenu(){
       const thisProduct = this;
       /* generate HTML based on template */
@@ -300,6 +304,11 @@
       const thisCart = this;
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
+
+    }
+    add (menuProduct){
+      const thisCart = this;
+
 
     }
 
