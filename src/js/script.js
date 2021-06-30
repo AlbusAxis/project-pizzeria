@@ -123,13 +123,15 @@
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidgetElem);
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper(select.cart.toggleTrigger);
     }
-    initActions(){
+    initActions(){ // Wrapper 
       const thisCart = this;
       thisCart.dom.toggleTrigger.addEventListener('click', function(event) {
         event.preventDefault();
         const cartWrapperActive = classNames.cart.wrapperActive;
+       
         if (cartWrapperActive != thisCart.element) {
           cartWrapperActive.remove('active');
+        
         }else { cartWrapperActive.toggle;
         }
 
