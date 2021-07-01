@@ -99,17 +99,47 @@
       console.log('new Product:', thisProduct);
 
     }
+    prepareCartProductParams() { // ??
+      const thisProduct = this;
+    
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      const params = {};
+    
+      // for very category (param)
+      for(let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+    
+        // create category param in params const eg. params = { ingredients: { name: 'Ingredients', options: {}}}
+        params[paramId] = {
+          label: param.label,
+          options: {}
+        }
+    
+        // for every option in this category
+        for(let optionId in param.options) {
+          const option = param.options[optionId];
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+    
+          if(optionSelected) {
+            // option is selected!
+          }
+        }
+      }
+    
+      return params;
+    }
+
     prepareCartProduct(){
       const thisProduct = this;
       const productSummary = {
-        params: 
-      };
+       params:
+      }
       thisProduct.id;
       thisProduct.name;
       thisProduct.amount;
       thisProduct.priceSingle;
       thisProduct.price;
-      return thisProduct.prepareCartProduct
+      return thisProduct.prepareCartProduct;
     }
     addToCart(){
       const thisProduct = this;
@@ -206,7 +236,6 @@
     }
     processOrder() {
       const thisProduct = this;
-      thisProduct.priceSingle
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
@@ -246,6 +275,7 @@
       }
       price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
+      thisProduct.priceSingle
       thisProduct.priceElem.innerHTML = price;
     }
   }
