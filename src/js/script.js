@@ -99,6 +99,15 @@
       console.log('new Product:', thisProduct);
 
     }
+    prepareCartProduct(){
+      const thisProduct = this;
+      const productSummary = {
+      thisProduct.id = id;
+      thisProduct.name = name;
+      thisProduct.amount = amount;
+      };
+
+    }
     addToCart(){
       const thisProduct = this;
       app.cart.add(thisProduct);
@@ -186,6 +195,7 @@
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
       thisProduct.amountWidgetElem.addEventListener('update', function(){
         thisProduct.processOrder();
@@ -193,14 +203,14 @@
     }
     processOrder() {
       const thisProduct = this;
-    
+      thisProduct.priceSingle
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('formData', formData);
     
       // set price to default price
       let price = thisProduct.data.price;
-    
+      
       // for every category (param)...
       for(let paramId in thisProduct.data.params) {
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
