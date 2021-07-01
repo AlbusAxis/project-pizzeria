@@ -122,6 +122,8 @@
     
           if(optionSelected) {
             // option is selected!
+            const finalOption = params[paramId].options
+            finalOption += optionSelected;
           }
         }
       }
