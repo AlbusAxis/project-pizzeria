@@ -102,11 +102,14 @@
     prepareCartProduct(){
       const thisProduct = this;
       const productSummary = {
-      thisProduct.id = id;
-      thisProduct.name = name;
-      thisProduct.amount = amount;
+        params: 
       };
-
+      thisProduct.id;
+      thisProduct.name;
+      thisProduct.amount;
+      thisProduct.priceSingle;
+      thisProduct.price;
+      return thisProduct.prepareCartProduct
     }
     addToCart(){
       const thisProduct = this;
