@@ -96,6 +96,7 @@
       thisProduct.initOrderForm.dom;
       thisProduct.processOrder.dom;
       thisProduct.initAmountWidget.dom;
+      
       console.log('new Product:', thisProduct);
 
     }
@@ -135,6 +136,7 @@
       const thisProduct = this;
       productSummary = {
         params: prepareCartProductParams;
+        
       }
       thisProduct.id;
       thisProduct.name;
@@ -151,7 +153,7 @@
       const cartContainer = document.querySelector(select.containerOf.cart);
       cartContainer.appendChild(thisProduct.element);
       thisCart.products.push(menuProduct);
-      
+
     }
     renderInMenu(){
       const thisProduct = this;
@@ -177,6 +179,7 @@
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidgetElem);
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.templateOf(select.cart.productList);
+      thisProduct.dom.cartProduct = thisCart.element.querySelector(select.menuProduct.cartProduct);
     }
     initActions(){ // Wrapper 
       const thisCart = this;
@@ -363,6 +366,18 @@
 
 
     }
+
+  }
+  class CartProduct {
+    constructor(menuProduct, element){
+      const thisCartProduct = this;
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.price = menuProduct.price;
+    };
+
 
   }
   
