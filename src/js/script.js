@@ -148,8 +148,8 @@
       app.cart.add(thisProduct);
       const generateHTML = templates.prepareCartProduct(thisProduct.data);
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
-      const menuContainer = document.querySelector(select.containerOf.cart);
-      menuContainer.appendChild(thisProduct.element);
+      const cartContainer = document.querySelector(select.containerOf.cart);
+      cartContainer.appendChild(thisProduct.element);
     }
     renderInMenu(){
       const thisProduct = this;
