@@ -387,7 +387,7 @@
       const thisCartProduct = this;
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidgetElem);
       thisCartProduct.amountWidget.addEventListener('click', function(){
-
+        thisCartProduct.price *= thisCartProduct.priceSingle;
       });
     }
 
