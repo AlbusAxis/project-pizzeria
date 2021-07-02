@@ -123,7 +123,7 @@
     
           if(optionSelected) {
             // option is selected!
-            const finalOption = params[paramId].options
+            const finalOption = params[paramId].options;
             finalOption += optionSelected;
           }
         }
@@ -141,12 +141,13 @@
         amount: thisProduct.amount,
         priceSingle: thisProduct.priceSingle,
         price: thisProduct.price,
-        
       }
+
       return prepareCartProduct;
     }
     addToCart(){
       const thisProduct = this;
+      const thisCart = this;
       app.cart.add(thisProduct);
       const generateHTML = templates.prepareCartProduct(thisProduct.data);
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
@@ -293,7 +294,7 @@
       }
       price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
-      thisProduct.priceSingle
+      thisProduct.priceSingle;
       thisProduct.priceElem.innerHTML = price;
     }
   }
@@ -369,8 +370,6 @@
     }
     add (menuProduct){
       const thisCart = this;
-
-
     }
     updated(){
       const thisCart = this;
@@ -378,8 +377,9 @@
       const def = 0;
       const totalNumber = Cart(def);
       const subTotalPrice = (Cart - deliveryFee)(def);
-      for(let )
     }
+ 
+  
 
   }
   class CartProduct {
@@ -390,7 +390,7 @@
       thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.price = menuProduct.price;
-    };
+    }
     AmountWidget(){
       const thisCartProduct = this;
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidgetElem);
