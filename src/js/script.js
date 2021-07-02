@@ -182,7 +182,7 @@
       thisCart.dom.productList = thisCart.dom.templateOf(select.cart.productList);
       thisProduct.dom.cartProduct = thisCart.element.querySelector(select.menuProduct.cartProduct);
       thisCartProduct.dom = thisCartProduct.dom.wrapper(element);
-      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.amountWidget);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.amountWidget.generateHTML);
       thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.price);
       thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.edit);
       thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.remove); 
