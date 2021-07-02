@@ -135,14 +135,14 @@
     prepareCartProduct(){
       const thisProduct = this;
       productSummary = {
-        params: prepareCartProductParams;
+        params: thisProduct.params,
+        id: thisProduct.id,
+        name: thisProduct.name,
+        amount: thisProduct.amount,
+        priceSingle: thisProduct.priceSingle,
+        price: thisProduct.price,
         
       }
-      thisProduct.id;
-      thisProduct.name;
-      thisProduct.amount;
-      thisProduct.priceSingle;
-      thisProduct.price;
       return prepareCartProduct;
     }
     addToCart(){
@@ -371,6 +371,14 @@
       const thisCart = this;
 
 
+    }
+    updated(){
+      const thisCart = this;
+      const deliveryFee = settings.amountWidget;
+      const def = 0;
+      const totalNumber = Cart(def);
+      const subTotalPrice = (Cart - deliveryFee)(def);
+      for(let )
     }
 
   }
