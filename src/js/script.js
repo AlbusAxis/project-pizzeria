@@ -141,7 +141,7 @@
         amount: thisProduct.amount,
         priceSingle: thisProduct.priceSingle,
         price: thisProduct.price,
-      }
+      };
 
       return prepareCartProduct;
     }
@@ -377,6 +377,10 @@
       const def = 0;
       const totalNumber = Cart(def);
       const subTotalPrice = (Cart - deliveryFee)(def);
+      for (let loop of thisCart.products){
+        loop.thisCart.products[totalNumber];
+        loop.thisCart.products[subTotalPrice + price];
+      }
     }
  
   
