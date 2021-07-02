@@ -152,7 +152,7 @@
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
       const cartContainer = document.querySelector(select.containerOf.cart);
       cartContainer.appendChild(thisProduct.element);
-      thisCart.products.push(menuProduct);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
 
     }
     renderInMenu(){
