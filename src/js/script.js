@@ -169,6 +169,7 @@
     getElements(){
       const thisProduct = this;
       const thisCart = this;
+      const thisCartProduct = this;
     
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -180,6 +181,11 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.templateOf(select.cart.productList);
       thisProduct.dom.cartProduct = thisCart.element.querySelector(select.menuProduct.cartProduct);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(element);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.amountWidget);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.price);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.edit);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.remove); 
     }
     initActions(){ // Wrapper 
       const thisCart = this;
