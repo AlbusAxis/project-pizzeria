@@ -442,7 +442,7 @@
     },
     initData: function(){
       const thisApp = this;
-      
+
       thisApp.data = dataSource;
       console.log('thisApp.data:', thisApp.data);
     },
