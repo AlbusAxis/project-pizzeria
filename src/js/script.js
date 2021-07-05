@@ -86,19 +86,16 @@
     // CODE ADDED END
   };
   class Product {
-    constructor (id, data){
-      const thisProduct = this;
-      thisProduct.id = id;
-      thisProduct.data = data;
-      thisProduct.renderInMenu.dom;
-      thisProduct.getElements.dom;
-      thisProduct.initAccordion.dom; // ??
-      thisProduct.initOrderForm.dom;
-      thisProduct.processOrder.dom;
-      thisProduct.initAmountWidget.dom;
-      
-      console.log('new Product:', thisProduct);
-
+    constructor(id, data) {
+      this.id = id;
+      this.data = data;
+      this.dom = {};
+      this.renderInMenu();
+      this.getElements();
+      this.initAccordion();
+      this.initOrderForm();
+      this.initAmountWidget();
+      this.processOrder();
     }
     prepareCartProductParams() { // ??
       const thisProduct = this;
@@ -114,17 +111,15 @@
         params[paramId] = {
           label: param.label,
           options: {}
-        }
-    
+        };
+
         // for every option in this category
         for(let optionId in param.options) {
           const option = param.options[optionId];
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
     
           if(optionSelected) {
-            // option is selected!
-            const finalOption = params[paramId].options;
-            finalOption += optionSelected;
+            params[paramId].options[optionId] = option.label;
           }
         }
       }
@@ -134,8 +129,9 @@
 
     prepareCartProduct(){
       const thisProduct = this;
-      productSummary = {
-        params: thisProduct.params,
+
+      const productSummary = {
+        params: thisProduct.prepareCartProductParams(),
         id: thisProduct.id,
         name: thisProduct.name,
         amount: thisProduct.amount,
@@ -143,18 +139,13 @@
         price: thisProduct.price,
       };
 
-      return prepareCartProduct;
+      return productSummary;
     }
+
     addToCart(){
       const thisProduct = this;
-      const thisCart = this;
-      app.cart.add(thisProduct);
-      const generateHTML = templates.prepareCartProduct(thisProduct.data);
-      thisProduct.element = utils.createDOMFromHTML(generateHTML);
-      const cartContainer = document.querySelector(select.containerOf.cart);
-      cartContainer.appendChild(thisProduct.element);
-      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
 
+      app.cart.add(thisProduct.prepareCartProduct());
     }
     renderInMenu(){
       const thisProduct = this;
@@ -169,8 +160,6 @@
     }
     getElements(){
       const thisProduct = this;
-      const thisCart = this;
-      const thisCartProduct = this;
     
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -178,15 +167,7 @@
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidgetElem);
-      thisCart.dom.toggleTrigger = thisCart.dom.wrapper(select.cart.toggleTrigger);
-      thisCart.dom.productList = thisCart.dom.templateOf(select.cart.productList);
-      thisProduct.dom.cartProduct = thisCart.element.querySelector(select.menuProduct.cartProduct);
-      thisCartProduct.dom = thisCartProduct.dom.wrapper(element);
-      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.amountWidget.generateHTML);
-      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.price);
-      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.edit);
-      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.remove); 
+      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
     initActions(){ // Wrapper 
       const thisCart = this;
@@ -285,13 +266,15 @@
               // reduce price variable
               price -= option.price;}
           }
+
+          const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+      
+          if (optionImage === null) {
+            console.log('optionImage:', optionImage);
+          }
         }
       }
-      const optionImage = thisProduct.imageWrapper.querySelector(select.pizza.images);
       
-      if (optionImage === null) {
-        console.log('optionImage:', optionImage);
-      }
       price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
       thisProduct.priceSingle;
@@ -307,6 +290,13 @@
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
       thisWidget.setValue(thisWidget.input.value);
+    }
+    getElements(element) {
+      this.dom = {};
+      this.dom.wrapper = element;
+      this.dom.input = this.dom.wrapper.querySelector(select.widgets.amount.input);
+      this.dom.linkDecrease = this.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
+      this.dom.linkIncrease = this.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
     }
     setValue(value){
       const thisWidget = this;
@@ -366,24 +356,46 @@
       const thisCart = this;
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
+      thisCart.dom.deliveryFee = element.querySelector(select.cart.deliveryFee);
+      thisCart.dom.subTotalPrice = element.querySelector(select.cart.subTotalPrice);
+      thisCart.dom.totalPrice = element.querySelectorAll(select.cart.totalPrice);
+      thisCart.dom.totalNumber = element.querySelector(select.cart.totalNumber);
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
 
     }
     add (menuProduct){
       const thisCart = this;
+      
+      const generateHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generateHTML);
+      const cartContainer = document.querySelector(select.containerOf.cart);
+      cartContainer.appendChild(generatedDOM);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     }
-    updated(){
+
+    update(){
       const thisCart = this;
-      const deliveryFee = settings.amountWidget;
-      const def = 0;
-      const totalNumber = Cart(def);
-      const subTotalPrice = (Cart - deliveryFee)(def);
-      for (let loop of thisCart.products){
-        loop.thisCart.products[totalNumber];
-        loop.thisCart.products[subTotalPrice + price];
+
+      thisCart.subTotalPrice = 0;
+      thisCart.totalPrice = 0;
+      thisCart.deliveryFee = 0;
+
+      for (let product of thisCart.products) {
+        thisCart.subTotalPrice += product.price;
+        thisCart.totalNumber += product.amount;
       }
+
+      if(thisCart.totalNumber > 0) thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.totalPrice = thisCart.subTotalPrice + thisCart.deliveryFee;
+
+      thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
+      thisCart.dom.subTotalPrice.innerHTML = thisCart.subTotalPrice;
+      for (let total of this.dom.totalPrice){
+        total.innerHTML = thisCart.totalPrice;
+      }
+      thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     }
- 
-  
 
   }
   class CartProduct {
@@ -394,6 +406,20 @@
       thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.price = menuProduct.price;
+      thisCartProduct.getElements(element);
+    }
+
+    getElements(element){
+      const thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(element);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.amountWidget.generateHTML);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.price);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.edit);
+      thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.remove); 
     }
     AmountWidget(){
       const thisCartProduct = this;
@@ -409,29 +435,23 @@
   
   const app = {
     initMenu: function(){
-      const testProduct = new Product();
-      console.log('testProduct:', testProduct);
+      const thisApp = this;
+      for (let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
     },
     initData: function(){
       const thisApp = this;
       
       thisApp.data = dataSource;
-      thisApp.initData();
       console.log('thisApp.data:', thisApp.data);
     },
 
     init: function() {
       const thisApp = this;
-      for (let productData in thisApp.data.products){
-        new Product(productData, thisApp.data.products[productData]);
-      }
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
-      
+      thisApp.initData();   
       thisApp.initMenu();
+      thisApp.initCart();
     },
     initCart: function(){
       const thisApp = this;
