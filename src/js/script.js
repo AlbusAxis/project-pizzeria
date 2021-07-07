@@ -182,9 +182,7 @@
         }
 
       });
-      thisCart.dom.productList.addEventListener('updated', function(){
-        thisCart.update();
-      });
+    
       
     }
   
@@ -401,7 +399,27 @@
       }
       thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     }
-
+    initActions(){
+      const thisCart = this;
+      thisCart.dom.productList.addEventListener('updated', function(){
+        thisCart.update();
+      });
+      thisCart.dom.productList.addEventListener('remove', function(){
+        thisCart.remove();
+      });
+    }
+    remove(){
+      const thisCart = this;
+      const event = new customEvent('remove',{
+        bubbles: true,
+        detail: {
+          Cart: thisCart,
+        },
+        });
+        thisCart.event.detail.cartProduct.innerHTML(event);
+        splice(thisCart.products);
+        update();
+    }
   }
   class CartProduct {
     constructor(menuProduct, element){
