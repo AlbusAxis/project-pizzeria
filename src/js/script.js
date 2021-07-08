@@ -410,15 +410,15 @@
     }
     remove(){
       const thisCart = this;
-      const event = new customEvent('remove',{
+      const event = new CustomEvent('remove',{
         bubbles: true,
         detail: {
           Cart: thisCart,
         },
-        });
-        thisCart.event.detail.cartProduct.innerHTML(event);
-        splice(thisCart.products);
-        update();
+      });
+      thisCart.event.detail.cartProduct.innerHTML(event);
+      thisCart.splice(thisCart.products);
+      thisCart.update();
     }
   }
   class CartProduct {
@@ -453,14 +453,14 @@
     }
     remove(){
       const thisCartProduct = this;
-      const event = new customEvent('remove',{
+      const event = new CustomEvent('remove',{
         bubbles: true,
         detail: {
           cartProduct: thisCartProduct,
         },
-        });
-        thisCartProduct.dom.wrapper.dispatchEvent(event);
-      }
+      });
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
+    }
     initActions(){
       const thisCartProduct = this;
       thisCartProduct.dom.edit.addEventListener('click', function(event){
@@ -470,8 +470,8 @@
         event.preventDefault();
         event();
       });
-      }
     }
+    
 
   }
 
