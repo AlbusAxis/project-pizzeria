@@ -78,6 +78,11 @@
       defaultDeliveryFee: 20,
     },
     // CODE ADDED END
+    db: {
+      url: '//localhost:3131',
+      products: 'products',
+      orders: 'orders',
+    },
   };
   
   const templates = {
@@ -471,9 +476,21 @@
     },
     initData: function(){
       const thisApp = this;
-
-      thisApp.data = dataSource;
+      const url = settings.db.url + '/' + settings.db.products;
+      thisApp.data = {};
       console.log('thisApp.data:', thisApp.data);
+      fetch(url)
+        .then(function(rawResponse){
+          return rawResponse.json();
+        })
+        .then(function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+          /* save parsedResponse as thisApp.data.products */
+          parsedResponse = thisApp.data.products;
+          /* execute initMenu method */
+          thisApp.initMenu();
+        });
+
     },
 
     init: function() {
