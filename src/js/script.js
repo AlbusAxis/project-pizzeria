@@ -471,7 +471,7 @@
     initMenu: function(){
       const thisApp = this;
       for (let productData in thisApp.data.products){
-        new Product(productData, thisApp.data.products[productData]);
+        new Product(thisApp.data.products[productData].id, thisApp.data.products[productData]);
       }
     },
     initData: function(){
@@ -490,13 +490,12 @@
           /* execute initMenu method */
           thisApp.initMenu();
         });
-
+      console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
 
     init: function() {
       const thisApp = this;
       thisApp.initData();   
-      thisApp.initMenu();
       thisApp.initCart();
     },
     initCart: function(){
