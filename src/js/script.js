@@ -478,8 +478,22 @@
       const thisApp = this;
       thisApp.data = {};
       console.log('thisApp.data:', thisApp.data);
+      const url = settings.db.url + '/' + settings.db.products;
+      fetch(url)
+        .then(function(rawResponse){
+          return rawResponse.json();
+        })
+        .then(function(parsedResponse){
+          console.log('parsedResponse:', parsedResponse);
+          parsedResponse = thisApp.data.products;
+          
+        });
+     
+      
+      console.log('thisApp.data', JSON.stringify(thisApp.data));
+
     },
-  
+    
     init: function() {
       const thisApp = this;
       thisApp.initData();   
@@ -492,19 +506,6 @@
       thisApp.cart = new Cart(cartElem);
     },
   };
-  const thisApp = this;
-  const url = settings.db.url + '/' + settings.db.products;
-  fetch(url)
-    .then(function(rawResponse){
-      return rawResponse.json();
-    })
-    .then(function(parsedResponse){
-      console.log('parsedResponse:', parsedResponse);
-      parsedResponse = thisApp.data.products;
-      thisApp.initMenu();
-    });
- 
-  console.log('thisApp.data', JSON.stringify(thisApp.data));
-  
+  app.initMenu();
   app.init();
 }
