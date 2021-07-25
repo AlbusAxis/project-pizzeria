@@ -485,7 +485,7 @@
         })
         .then(function(parsedResponse){
           console.log('parsedResponse:', parsedResponse);
-          parsedResponse = thisApp.data.products;
+          parsedResponse.thisApp.data.products;
           
         });
      
