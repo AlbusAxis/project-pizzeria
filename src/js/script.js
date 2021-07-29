@@ -345,7 +345,6 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
-
     }
 
     initActions(){ // Wrapper 
@@ -365,6 +364,7 @@
       });
       thisCart.dom.form.addEventListener('submit', function(event){
         event.preventDefault();
+        thisCart.sendOrder();
       });
     }
     
@@ -438,6 +438,7 @@
       thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.edit);
       thisCartProduct.dom = thisCartProduct.dom.wrapper(select.menuProduct.remove); 
     }
+    
     AmountWidget(){
       const thisCartProduct = this;
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidgetElem);
