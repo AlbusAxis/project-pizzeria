@@ -363,7 +363,11 @@
       thisCart.dom.productList.addEventListener('remove', function(){
         thisCart.remove();
       });
+      thisCart.dom.form.addEventListener('submit', function(event){
+        event.preventDefault();
+      });
     }
+    
 
     add (menuProduct){
       const thisCart = this;
