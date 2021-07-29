@@ -344,6 +344,7 @@
       thisCart.dom.totalNumber = element.querySelector(select.cart.totalNumber);
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
 
     }
 
