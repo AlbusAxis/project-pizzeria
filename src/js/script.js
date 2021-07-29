@@ -414,7 +414,12 @@
       thisCart.splice(thisCart.products);
       thisCart.update();
     }
+    sendOrder(){
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.orders;
+    }
   }
+  
   class CartProduct {
     constructor(menuProduct, element){
       const thisCartProduct = this;
