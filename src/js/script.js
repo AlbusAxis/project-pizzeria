@@ -415,7 +415,7 @@
       thisCart.update();
     }
     sendOrder(){
-      const thisCart = this;
+      const thisCart = this
       const url = settings.db.url + '/' + settings.db.orders;
       payload.products = {};
     }
