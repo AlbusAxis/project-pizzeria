@@ -345,6 +345,9 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.address = element.querySelector(select.value.address);
+      thisCart.dom.phone = element.querySelector(select.value.phone);
+      thisCart.dom.deliveryFee = element.querySelector(select.value.deliveryFee);
     }
 
     initActions(){ // Wrapper 
@@ -419,6 +422,7 @@
       const url = settings.db.url + '/' + settings.db.orders;
       payload.products = {};
     }
+    
   }
   
   class CartProduct {
