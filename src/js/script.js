@@ -584,7 +584,12 @@
         thisCartProduct.remove();
       });
     }
+    sendOrder() {
+      thisCart = this;
+      
+    }
   }
+ 
 
   const app = {
     initMenu: function(){
