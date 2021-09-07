@@ -383,7 +383,7 @@
     }
 
     update(){
-      const thisCart = this;
+      let thisCart = this;
 
       thisCart.subTotalPrice = 0;
       thisCart.totalPrice = 0;
