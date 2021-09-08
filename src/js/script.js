@@ -519,7 +519,7 @@
     sendOrder() {
       const thisCart = this;
       const url = settings.db.url + '/' + settings.db.orders;
-      payload.products = {};
+      const payload = payload.products = {};
 
       for(let prod of thisCart.products) {
         payload.products.push(prod.getData());
