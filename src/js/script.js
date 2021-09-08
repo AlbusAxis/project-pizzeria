@@ -185,6 +185,7 @@
       });
 
       for(let input of thisProduct.formInputs){
+        event.preventDefault();
         input.addEventListener('change', function(){
           thisProduct.processOrder();
         });
