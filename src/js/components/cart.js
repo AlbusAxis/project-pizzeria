@@ -1,3 +1,7 @@
+import {settings, select} from '../settings';
+import utils from './components/utils';
+import CartProduct from './components/cartProduct';
+
 class Cart{
   constructor(element) {
     const thisCart = this;
@@ -112,3 +116,4 @@ class Cart{
     fetch(url, options);
   }
 }
+export default Cart;

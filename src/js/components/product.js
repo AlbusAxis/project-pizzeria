@@ -1,3 +1,6 @@
+import {select} from '../settings';
+import utils from './components/utils';
+
 class Product{
   constructor(id, data){
     const thisProduct = this;
@@ -189,8 +192,14 @@ class Product{
   addToCart(){
     const thisProduct = this;
 
-    app.cart.add(thisProduct.prepareCartProduct());
-
+    //app.cart.add(thisProduct.prepareCartProduct());
+    const event = new CustomEvent('add-to-cart', {
+      bubbles: true,
+      detail: {
+        product: thisProduct,
+      }
+    });
+    thisProduct.element.dispatchEvent(event);
   }
 
   prepareCartProduct(){
@@ -253,3 +262,4 @@ class Product{
   }
 
 }
+export default Product;

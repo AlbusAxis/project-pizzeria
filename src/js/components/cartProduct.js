@@ -1,3 +1,6 @@
+import AmountWidget from './components/AmountWidget';
+import {select} from '../settings';
+
 class CartProduct {
   constructor(menuProduct, element) {
 
@@ -78,3 +81,4 @@ class CartProduct {
   }
 
 }
+export default CartProduct;
