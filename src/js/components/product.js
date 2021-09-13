@@ -1,5 +1,6 @@
-import {select} from '../settings';
+import {select, templates, classNames} from '../settings';
 import utils from './components/utils';
+import AmountWidget from './components/AmountWidget';
 
 class Product{
   constructor(id, data){

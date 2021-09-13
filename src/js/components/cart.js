@@ -1,4 +1,4 @@
-import {settings, select} from '../settings';
+import {settings, select, templates, classNames} from '../settings';
 import utils from './components/utils';
 import CartProduct from './components/cartProduct';
 
