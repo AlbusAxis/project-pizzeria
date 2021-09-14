@@ -3,15 +3,37 @@ import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 
 
+
+
 const app = {
   initPages: function(){
     const thisApp = this;
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
 
-    thisApp.activatePage(thisApp.pages[0].id);
-
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+
+    const idFromHash = window.location.hash.replace('#/', '');
+    console.log('idFromHash', idFromHash);
+
+    thisApp.activatePage(idFromHash);
+
+    for(let link of thisApp.navLinks){
+      link.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+
+        /* get page id form href attribute */
+        const id = clickedElement.getAttribute('href').replace('#', '');
+
+        /* run thisApp.activePage with that id */
+        thisApp.activatePage(id);
+
+        /* change URL hash */
+        window.location.hash = '#/' + id;
+      });
+    }
+    
   },
   activatePage: function(pageId){
     const thisApp = this;
